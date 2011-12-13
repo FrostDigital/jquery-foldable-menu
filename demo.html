@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style type="text/css" media="screen">
+			section { padding-top:20px; }
+		</style>
+		<link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+		
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="jquery.foldable-menu.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript" charset="utf-8">
+			$(function() {
+				$("#uploadedFiles").foldableMenu([
+				{
+				    name: "Foo",
+					id: 1,
+					
+				    children: [
+						{ name: "Leaf 1", id: 1 },
+						{ name: "Leaf 2", id: 2 },
+						{ 
+							name: "Cat 2", 
+							id: 2,
+							children: [
+								{ name: "Leaf 2.1", id: 21 }
+							]
+						}
+					]
+				},
+				{ name: "Root leaf", id:0 }
+				]);
+			});
+		</script>
+		
+		<style type="text/css" media="screen">
+			ul { list-style: none; padding-left:10px; margin:0; }
+			
+			#uploadedFiles { width:200px; background-color: #f1f1f1; }
+			#uploadedFiles .cat > a { color: #333; }
+		</style>
+	</head>
+	
+	<body>
+		<div class="container">
+			<section>
+				<h1>jquery.foldableMenu</h1>
+
+				<ul id="uploadedFiles">
+				</ul>
+				
+			</section>
+		</div>
+	</body>
+</html>

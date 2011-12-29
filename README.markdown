@@ -1,8 +1,8 @@
-h1. Foldable menu
+# Foldable menu
 
 This plugin aims to create a simple foldable, vertical menu tree structure.
 
-h2. Usage
+## Usage
 	
 	var menu = [
 		{
@@ -19,6 +19,6 @@ h2. Usage
     $("#uploadedFiles").foldableMenu(menu);
 
 
-h2. License
+## License
 
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)

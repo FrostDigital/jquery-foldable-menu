@@ -36,8 +36,9 @@
 			$this.addClass(isCat ? opts.catCssClass : opts.leafCssClass);
 			
 			if(isCat) {
+				console.log('init: ' + $this.find('>a').text());
 				$this.find('>a').click(toggleCat);
-				traverse($ul, opts);
+				//traverse($ul, opts);
 			}
 		});
 	}

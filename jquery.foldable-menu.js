@@ -72,6 +72,7 @@
 	
 	function toggleCat(e) {
 		$(this).next().slideToggle('fast');
+		// TODO: add css class for folded/unfolded
 		return false;
 	}
 	

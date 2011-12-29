@@ -3,6 +3,9 @@
 	<head>
 		<style type="text/css" media="screen">
 			section { padding-top:20px; }
+			
+			.cat { font-weight:bold; }
+			
 		</style>
 		<link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
 		
@@ -11,7 +14,7 @@
 		
 		<script type="text/javascript" charset="utf-8">
 			$(function() {
-				$("#uploadedFiles").foldableMenu([
+				var source = [
 				{
 				    name: "Foo",
 					id: 1,
@@ -29,15 +32,22 @@
 					]
 				},
 				{ name: "Root leaf", id:0 }
-				]);
+				];
+				
+				$("#example1").foldableMenu({model: source});
+				
+				
+				// Example 2: 
+				$("#example2").foldableMenu();
+				
 			});
 		</script>
 		
 		<style type="text/css" media="screen">
 			ul { list-style: none; padding-left:10px; margin:0; }
 			
-			#uploadedFiles { width:200px; background-color: #f1f1f1; }
-			#uploadedFiles .cat > a { color: #333; }
+			.menu { width:200px; background-color: #f1f1f1; }
+			.menu .cat > a { color: #333; }
 		</style>
 	</head>
 	
@@ -45,8 +55,23 @@
 		<div class="container">
 			<section>
 				<h1>jquery.foldableMenu</h1>
-
-				<ul id="uploadedFiles">
+				
+				<h3>Example 1: Create menu from JSON object</h2>
+				<ul id="example1" class="menu">
+				</ul>
+				
+				<hr />
+				
+				<h3>Example 2: Create menu from HTML markup</h2>
+				<ul id="example2" class="menu">
+					<li><a href="#">Leaf 1</a></li>
+					<li>
+						<a href="#">Cat 2</a>
+						<ul>
+							<li><a href="#">Leaf 2.1</a></li>
+							<li><a href="#">Leaf 2.2</a></li>
+						</ul>
+					</li>
 				</ul>
 				
 			</section>

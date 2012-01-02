@@ -8,7 +8,8 @@
 		model: undefined,			// Tree model/source, if null markup of current jQuery el will be used to construct tree
 		urlPrefix: undefined,		// Prefix of all hrefs in tree
 		catCssClass: 'cat',			// Category CSS class
-		leafCssClass: 'leaf'		// Leaf CSS class
+		leafCssClass: 'leaf',		// Leaf CSS class
+		catUnfoldedCssClass: 'cat-unfolded'
 	};
 	
 	function Plugin(el, opts) {
@@ -36,8 +37,7 @@
 			$this.addClass(isCat ? opts.catCssClass : opts.leafCssClass);
 			
 			if(isCat) {
-				console.log('init: ' + $this.find('>a').text());
-				$this.find('>a').click(toggleCat);
+				$this.find('>a').bind('click', {opts: opts}, toggleCat);
 				//traverse($ul, opts);
 			}
 		});
@@ -47,13 +47,13 @@
 		var $ul;
 		
 		if(!isRoot) {
-			var $a = $('<a href="#' + o.id + '">' + o.name + '</a>');
+			var $a = $('<a href="#' + o.id + '">' + o.name + '<span></span></a>'); // span element used for folded/unfolded indicator 
 			$ul = $('<ul />');
 			$ctn.append($a)
 				.append($ul)
 				.addClass(opts.catCssClass);
 			
-			$a.click(toggleCat);
+			$a.bind('click', { opts: opts }, toggleCat);
 		} else {
 			$ul = $ctn;
 		}
@@ -71,10 +71,15 @@
 	}
 	
 	function toggleCat(e) {
-		$(this).next().slideToggle('fast');
-		// TODO: add css class for folded/unfolded
+		$(this)
+			.parent('li')
+			.toggleClass(e.data.opts.catUnfoldedCssClass)
+			.end()
+			.next()
+			.slideToggle('fast');
+
 		return false;
-	}
+	};
 	
 	function collapse($ctn) {
 		$ctn.find('ul').hide();

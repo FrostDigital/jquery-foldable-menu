@@ -44,10 +44,16 @@
 		</script>
 		
 		<style type="text/css" media="screen">
-			ul { list-style: none; padding-left:10px; margin:0; }
+			ul { list-style: none; /*padding-left:10px;*/ margin:0; }
 			
-			.menu { width:200px; background-color: #f1f1f1; }
-			.menu .cat > a { color: #333; }
+			.menu { width:200px; }
+			.menu li { padding:7px 0 7px 5px; }
+			.menu > li { border-top: 1px solid #ccc; }
+			.menu > li:last-child { border-bottom: 1px solid #ccc; }
+			.menu .cat > a { color: #333; display:block; }
+			.menu .cat > a span { float:right; display:block; width:8px; height:8px; margin:4px 4px 0; background: #ccc url(plus.gif) no-repeat top right; }
+			.menu .cat > a:hover span { background-color:#E30917; }
+			.menu .cat-unfolded > a span { background-image: url(minus.gif); }
 		</style>
 	</head>
 	

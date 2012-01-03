@@ -7,9 +7,11 @@
     var defaults = {
 		model: undefined,			// Tree model/source, if null markup of current jQuery el will be used to construct tree
 		urlPrefix: undefined,		// Prefix of all hrefs in tree
-		catCssClass: 'cat',			// Category CSS class
-		leafCssClass: 'leaf',		// Leaf CSS class
-		catUnfoldedCssClass: 'cat-unfolded'
+		idAttr: 'data-leaf-id',		// Name of custom attribute that hold leaf id	
+		catCssClass: 'cat',			// Category <li> CSS class
+		leafCssClass: 'leaf',		// Leaf <li> element CSS class
+		catUnfoldedCssClass: 'cat-unfolded',	
+		activeLeafId: undefined		// ID of active leaf - menu will unfold to show this leaf
 	};
 	
 	function Plugin(el, opts) {
@@ -26,6 +28,15 @@
 		}
 		
 		collapse(this.el);
+		
+		if(this.opts.activeLeafId) {
+			// unfold menu to show active leaf
+			this.showLeaf(this.opts.activeLeafId);
+		}
+	};
+	
+	Plugin.prototype.showLeaf = function(id) {
+		$('[' + this.opts.idAttr + '=' + id + ']').parents('ul').show();
 	};
 	
 	function traverse($ctn, opts) {
@@ -37,8 +48,9 @@
 			$this.addClass(isCat ? opts.catCssClass : opts.leafCssClass);
 			
 			if(isCat) {
-				$this.find('>a').bind('click', {opts: opts}, toggleCat);
-				//traverse($ul, opts);
+				$this
+					.find('>a')
+					.bind('click', {opts: opts}, toggleCat);
 			}
 		});
 	}
@@ -66,8 +78,9 @@
 	};
 	
 	function renderLeaf($li, leaf, opts) {
-		$li.addClass(opts.leafCssClass);
-		$li.append('<a href="' + (opts.urlPrefix ? opts.urlPrefix : '')  + leaf.id + '">' + leaf.name + '</a>')
+		$li.addClass(opts.leafCssClass)
+			.attr(opts.idAttr, leaf.id)
+			.append('<a href="' + (opts.urlPrefix ? opts.urlPrefix : '')  + leaf.id + '">' + leaf.name + '</a>');
 	}
 	
 	function toggleCat(e) {

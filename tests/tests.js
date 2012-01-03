@@ -41,12 +41,5 @@ $(function() {
 		equal('leaf', 	$menu.find('li').first().attr('class'), 		"First child should be a leaf");
 		equal('cat', 	$menu.find('li:nth-child(2)').attr('class'), 	"Second child should be a category");
 	});
-		
-	
-	
-	
-	
-	// HELPERS
-	
 	
 });
